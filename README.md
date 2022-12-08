@@ -5,10 +5,10 @@
 2、文字教程：[【C#/Shell】淘宝买家订单规整工具](https://www.zjhcofi.com/2022/12/09/get-taobao-order/)  
   
 3、目录说明：  
-**【Compiled_Version_成品】** 内的工具可以直接使用  
-**【Linux_Shell_Source_Code】** 内的文件为脚本源代码  
-**【Windows_C#_Source_Code】** 内的文件为C#源代码  
-**【淘宝买家订单规整工具数据统计模板.xlsm】** 的功能如其名  
+**【Compiled_Version_成品】**内的工具可以直接使用  
+**【Linux_Shell_Source_Code】**内的文件为脚本源代码  
+**【Windows_C#_Source_Code】**内的文件为C#源代码  
+**【淘宝买家订单规整工具数据统计模板.xlsm】**的功能如其名  
   
 ==========重要内容=========  
   
