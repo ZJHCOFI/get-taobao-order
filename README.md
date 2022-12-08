@@ -21,8 +21,4 @@
   
 =========================  
   
-6、您需要准备的：  
-系统：Linux 或 Windows 7(及以上版本)  
-浏览器：微软Edge浏览器[Microsoft Edge](https://www.microsoft.com/zh-cn/edge/) **或** 谷歌浏览器[Google Chrome](https://www.google.com/chrome/) **或** 火狐浏览器[Firefox](https://www.mozilla.org/zh-CN/firefox/browsers/)
-  
-7、感谢[cnlnn](https://github.com/cnlnn)对本项目的大力支持
+6、感谢[cnlnn](https://github.com/cnlnn)对本项目的大力支持
