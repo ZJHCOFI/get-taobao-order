@@ -17,7 +17,8 @@
 5、Windows工具成品(淘宝买家订单规整工具.exe)注意事项：  
 1）下载和使用时请关闭杀毒软件  
 2）请勿修改文件名，否则可能会导致软件运行出错  
-3）如无法正常打开，请下载[.NET Framework 4.0](https://dotnet.microsoft.com/zh-cn/download/dotnet-framework/thank-you/net40-offline-installer)框架
+3）如无法正常打开，请下载[.NET Framework 4.0](https://dotnet.microsoft.com/zh-cn/download/dotnet-framework/thank-you/net40-offline-installer)框架  
+4）如点击“开始规整”后软件无响应，请让子弹飞一会儿
     
 ==========重要内容=========  
   
