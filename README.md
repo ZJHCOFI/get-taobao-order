@@ -11,7 +11,7 @@
 **【淘宝买家订单规整工具数据统计模板.xlsm】** 的功能如其名  
   
 4、编程语言：  
-1）Windows工具：C# (框架:.NET Framework 4.0)  
+1）Windows工具：C# (.NET Framework 4.0框架)  
 2）Linux工具：Shell  
   
 5、Windows工具成品(淘宝买家订单规整工具.exe)注意事项：  
