@@ -1,12 +1,18 @@
 #!/bin/bash
 #编写时间：2022.11.12
-#更新时间：2022.11.19 23:57
+#更新时间：2023.01.19 01:49
 #Edit by ZJHCOFI
 #博客Blog：http://zjhcofi.com
 #Github：http://github.com/zjhcofi
 #功能：规整淘宝中的买家订单
 #开源协议：BSD 3-Clause “New” or “Revised” License (https://choosealicense.com/licenses/bsd-3-clause/)
 #后续更新或漏洞修补通告页面：https://space.bilibili.com/9704701/dynamic
+#=====更新日志=====
+#2022.11.19 23:57
+#第一个版本发布
+#2023.01.19 01:49
+#修改了用于分割的字符串，解决了某些使用场景下出现的订单号错误的bug
+#==================
 
 # 脚本当前路径
 path_way=$(readlink -f "$(dirname "$0")")
@@ -91,7 +97,8 @@ function Order_info_get() {
     # 主订单文件名
     dd_filename=`ls ${path_way}/zjhcofi_goods_${dd_num}*tmp | head -n 1`
     # 订单号
-    dd_id=`awk -F ',"inHold":' '{print $1}' ${dd_filename} | awk -F '"id":' '{print $2}'`
+    #dd_id=`awk -F ',"inHold":' '{print $1}' ${dd_filename} | awk -F '"id":' '{print $2}'`
+    dd_id=`awk -F '","operations":\\\[\\\{"' '{print $1}' ${dd_filename} | awk -F '"id":"' '{print $2}'`
     dd_id=`echo ${dd_id} | awk -F ',' '{print $1}'`
     # 订单创建时间
     dd_create_time=`awk -F 'createTime":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
