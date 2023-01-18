@@ -53,6 +53,7 @@ namespace Get_taobao_order
             this.progressBar_deal = new System.Windows.Forms.ProgressBar();
             this.label4 = new System.Windows.Forms.Label();
             this.label_test = new System.Windows.Forms.Label();
+            this.linkLabel_update_record = new System.Windows.Forms.LinkLabel();
             this.groupBox_input.SuspendLayout();
             this.panel_input.SuspendLayout();
             this.groupBox_output.SuspendLayout();
@@ -63,7 +64,7 @@ namespace Get_taobao_order
             // 
             this.label_title.AutoSize = true;
             this.label_title.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_title.Location = new System.Drawing.Point(200, 20);
+            this.label_title.Location = new System.Drawing.Point(215, 20);
             this.label_title.Name = "label_title";
             this.label_title.Size = new System.Drawing.Size(170, 22);
             this.label_title.TabIndex = 0;
@@ -174,7 +175,7 @@ namespace Get_taobao_order
             // button_start
             // 
             this.button_start.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_start.Location = new System.Drawing.Point(168, 473);
+            this.button_start.Location = new System.Drawing.Point(177, 473);
             this.button_start.Name = "button_start";
             this.button_start.Size = new System.Drawing.Size(108, 35);
             this.button_start.TabIndex = 2;
@@ -185,24 +186,25 @@ namespace Get_taobao_order
             // panel_info
             // 
             this.panel_info.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.panel_info.Controls.Add(this.linkLabel_update_record);
             this.panel_info.Controls.Add(this.linkLabel_course);
             this.panel_info.Controls.Add(this.label3);
             this.panel_info.Controls.Add(this.linkLabel_author);
             this.panel_info.Controls.Add(this.label2);
             this.panel_info.Controls.Add(this.linkLabel_license);
             this.panel_info.Controls.Add(this.label1);
-            this.panel_info.Location = new System.Drawing.Point(0, 524);
+            this.panel_info.Location = new System.Drawing.Point(0, 522);
             this.panel_info.Name = "panel_info";
-            this.panel_info.Size = new System.Drawing.Size(605, 29);
+            this.panel_info.Size = new System.Drawing.Size(605, 24);
             this.panel_info.TabIndex = 31;
             // 
             // linkLabel_course
             // 
             this.linkLabel_course.AutoSize = true;
-            this.linkLabel_course.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.linkLabel_course.Location = new System.Drawing.Point(71, 2);
+            this.linkLabel_course.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.linkLabel_course.Location = new System.Drawing.Point(58, 2);
             this.linkLabel_course.Name = "linkLabel_course";
-            this.linkLabel_course.Size = new System.Drawing.Size(65, 20);
+            this.linkLabel_course.Size = new System.Drawing.Size(56, 17);
             this.linkLabel_course.TabIndex = 4;
             this.linkLabel_course.TabStop = true;
             this.linkLabel_course.Text = "点击此处";
@@ -211,20 +213,20 @@ namespace Get_taobao_order
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(3, 2);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 20);
+            this.label3.Size = new System.Drawing.Size(68, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "操作教程：";
             // 
             // linkLabel_author
             // 
             this.linkLabel_author.AutoSize = true;
-            this.linkLabel_author.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.linkLabel_author.Location = new System.Drawing.Point(531, 2);
+            this.linkLabel_author.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.linkLabel_author.Location = new System.Drawing.Point(545, 2);
             this.linkLabel_author.Name = "linkLabel_author";
-            this.linkLabel_author.Size = new System.Drawing.Size(66, 20);
+            this.linkLabel_author.Size = new System.Drawing.Size(57, 17);
             this.linkLabel_author.TabIndex = 6;
             this.linkLabel_author.TabStop = true;
             this.linkLabel_author.Text = "ZJHCOFI";
@@ -233,20 +235,20 @@ namespace Get_taobao_order
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(444, 2);
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(470, 2);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 20);
+            this.label2.Size = new System.Drawing.Size(81, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Copyright ©";
             // 
             // linkLabel_license
             // 
             this.linkLabel_license.AutoSize = true;
-            this.linkLabel_license.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.linkLabel_license.Location = new System.Drawing.Point(209, 2);
+            this.linkLabel_license.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.linkLabel_license.Location = new System.Drawing.Point(177, 2);
             this.linkLabel_license.Name = "linkLabel_license";
-            this.linkLabel_license.Size = new System.Drawing.Size(230, 20);
+            this.linkLabel_license.Size = new System.Drawing.Size(202, 17);
             this.linkLabel_license.TabIndex = 5;
             this.linkLabel_license.TabStop = true;
             this.linkLabel_license.Text = "BSD 3-Clause \"New\" or \"Revised\"";
@@ -255,17 +257,17 @@ namespace Get_taobao_order
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(139, 2);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(120, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 20);
+            this.label1.Size = new System.Drawing.Size(68, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "开源协议：";
             // 
             // button_clear
             // 
             this.button_clear.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_clear.Location = new System.Drawing.Point(305, 473);
+            this.button_clear.Location = new System.Drawing.Point(319, 473);
             this.button_clear.Name = "button_clear";
             this.button_clear.Size = new System.Drawing.Size(108, 35);
             this.button_clear.TabIndex = 3;
@@ -312,12 +314,24 @@ namespace Get_taobao_order
             this.label_test.Text = "🤪测试专用框⬆️";
             this.label_test.Visible = false;
             // 
+            // linkLabel_update_record
+            // 
+            this.linkLabel_update_record.AutoSize = true;
+            this.linkLabel_update_record.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.linkLabel_update_record.Location = new System.Drawing.Point(385, 2);
+            this.linkLabel_update_record.Name = "linkLabel_update_record";
+            this.linkLabel_update_record.Size = new System.Drawing.Size(80, 17);
+            this.linkLabel_update_record.TabIndex = 7;
+            this.linkLabel_update_record.TabStop = true;
+            this.linkLabel_update_record.Text = "软件更新日志";
+            this.linkLabel_update_record.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_update_record_LinkClicked);
+            // 
             // Main
             // 
             this.AcceptButton = this.button_start;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 551);
+            this.ClientSize = new System.Drawing.Size(604, 544);
             this.Controls.Add(this.label_test);
             this.Controls.Add(this.progressBar_deal);
             this.Controls.Add(this.textBox_test);
@@ -335,7 +349,7 @@ namespace Get_taobao_order
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "淘宝买家订单规整工具(更新时间：2022.11.26 22:18)";
+            this.Text = "淘宝买家订单规整工具(更新时间：2023.01.19 01:08)";
             this.groupBox_input.ResumeLayout(false);
             this.panel_input.ResumeLayout(false);
             this.panel_input.PerformLayout();
@@ -373,6 +387,7 @@ namespace Get_taobao_order
         private System.Windows.Forms.ProgressBar progressBar_deal;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_test;
+        private System.Windows.Forms.LinkLabel linkLabel_update_record;
     }
 }
 

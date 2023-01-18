@@ -60,6 +60,13 @@ namespace Get_taobao_order
             }
         }
 
+        //=======点击“软件更新日志”=======
+        private void linkLabel_update_record_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Update_record Update_record = new Update_record();
+            Update_record.ShowDialog();
+        }
+
         //=======点击操作教程=======
         private void linkLabel_course_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -240,8 +247,10 @@ namespace Get_taobao_order
                             if (a == 1)
                             {
                                 //订单号截取
-                                string[] dd_id_split_1 = Regex.Split(b, ",\"inHold\":");
-                                string[] dd_id_split_2 = Regex.Split(dd_id_split_1[0], "\"id\":");
+                                //string[] dd_id_split_1 = Regex.Split(b, ",\"inHold\":");
+                                //string[] dd_id_split_2 = Regex.Split(dd_id_split_1[0], "\"id\":");
+                                string[] dd_id_split_1 = Regex.Split(b, "\",\"operations\":\\[{\"");
+                                string[] dd_id_split_2 = Regex.Split(dd_id_split_1[0], "\"id\":\"");
                                 string[] dd_id_split_3 = Regex.Split(dd_id_split_2[1], ",");
                                 dd_id.Add(dd_id_split_3[0]);
 
@@ -522,5 +531,6 @@ namespace Get_taobao_order
             textBox_test.Text = "";
             progressBar_deal.Value = 0;
         }
+
     }
 }
