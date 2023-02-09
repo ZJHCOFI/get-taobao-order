@@ -16,8 +16,7 @@
 3、目录说明：  
 **【Compiled_Version_成品】** 内的工具可以直接使用  
 **【Linux_Shell_Source_Code】** 内的文件为脚本源代码  
-**【Windows_C#_Source_Code】** 内的文件为C#源代码  
-**【淘宝买家订单规整工具数据统计模板.xlsm】** 的功能如其名  
+**【Windows_C#_Source_Code】** 内的文件为C#源代码   
   
 4、编程语言：  
 1）Windows工具：C# (.NET Framework 4.0框架)  
