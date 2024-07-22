@@ -19,13 +19,21 @@ namespace Get_taobao_order
         }
 
         // 编写时间：2022.11.19
-        // 更新时间：2022.11.19 22:33
+        // 更新时间：2024.07.22 14:20
         // Edit by ZJHCOFI
         // 博客Blog：http://zjhcofi.com
         // Github：http://github.com/zjhcofi
         // 功能：规整淘宝中的买家订单
         // 开源协议：BSD 3-Clause “New” or “Revised” License (https://choosealicense.com/licenses/bsd-3-clause/)
         // 后续更新或漏洞修补通告页面：https://space.bilibili.com/9704701/dynamic
+        //=====更新日志=====
+        //2022.11.19 23:57
+        // 第一个版本发布
+        //2023.01.19 01:49
+        // 修改了用于分割的字符串，解决了某些使用场景下出现的订单号错误的bug
+        //2024.07.22 14:20
+        // 解决了预售订单场景下，获取订单状态失败导致程序报错的问题
+        //==================
 
         //文本处理委托-First_deal
         private static bool FindCallback_text_deal_1(string val)
@@ -274,9 +282,20 @@ namespace Get_taobao_order
 
                                 //订单状态截取
                                 //string[] dd_state_split = b.Split(new string[] { "\" }],\"text\":\"", "\"" }, StringSplitOptions.RemoveEmptyEntries);
-                                string[] dd_state_split_1 = Regex.Split(b, "],\"text\":\"");
-                                string[] dd_state_split_2 = Regex.Split(dd_state_split_1[1], "\"");
-                                dd_state.Add(dd_state_split_2[0]);
+                                if (b.Contains("],\"text\":\"") == true)
+                                {
+                                    string[] dd_state_split_1 = Regex.Split(b, "],\"text\":\"");
+                                    string[] dd_state_split_2 = Regex.Split(dd_state_split_1[1], "\"");
+                                    dd_state.Add(dd_state_split_2[0]);
+                                }
+                                else if (b.Contains("\"linkTitle\":\"预售\"") == true)
+                                {
+                                    dd_state.Add("预售");
+                                }
+                                else
+                                {
+                                    dd_state.Add("未知状态");
+                                }
 
                                 //订单店铺名称截取
                                 //string[] dd_shop_name_split = b.Split(new string[] { "\"shopName\":\"", "\"" }, StringSplitOptions.RemoveEmptyEntries);

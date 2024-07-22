@@ -42,6 +42,7 @@ namespace Get_taobao_order
             this.textBox_output = new System.Windows.Forms.TextBox();
             this.button_start = new System.Windows.Forms.Button();
             this.panel_info = new System.Windows.Forms.Panel();
+            this.linkLabel_update_record = new System.Windows.Forms.LinkLabel();
             this.linkLabel_course = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.linkLabel_author = new System.Windows.Forms.LinkLabel();
@@ -53,7 +54,6 @@ namespace Get_taobao_order
             this.progressBar_deal = new System.Windows.Forms.ProgressBar();
             this.label4 = new System.Windows.Forms.Label();
             this.label_test = new System.Windows.Forms.Label();
-            this.linkLabel_update_record = new System.Windows.Forms.LinkLabel();
             this.groupBox_input.SuspendLayout();
             this.panel_input.SuspendLayout();
             this.groupBox_output.SuspendLayout();
@@ -198,6 +198,18 @@ namespace Get_taobao_order
             this.panel_info.Size = new System.Drawing.Size(605, 24);
             this.panel_info.TabIndex = 31;
             // 
+            // linkLabel_update_record
+            // 
+            this.linkLabel_update_record.AutoSize = true;
+            this.linkLabel_update_record.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.linkLabel_update_record.Location = new System.Drawing.Point(385, 2);
+            this.linkLabel_update_record.Name = "linkLabel_update_record";
+            this.linkLabel_update_record.Size = new System.Drawing.Size(80, 17);
+            this.linkLabel_update_record.TabIndex = 7;
+            this.linkLabel_update_record.TabStop = true;
+            this.linkLabel_update_record.Text = "软件更新日志";
+            this.linkLabel_update_record.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_update_record_LinkClicked);
+            // 
             // linkLabel_course
             // 
             this.linkLabel_course.AutoSize = true;
@@ -314,18 +326,6 @@ namespace Get_taobao_order
             this.label_test.Text = "🤪测试专用框⬆️";
             this.label_test.Visible = false;
             // 
-            // linkLabel_update_record
-            // 
-            this.linkLabel_update_record.AutoSize = true;
-            this.linkLabel_update_record.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.linkLabel_update_record.Location = new System.Drawing.Point(385, 2);
-            this.linkLabel_update_record.Name = "linkLabel_update_record";
-            this.linkLabel_update_record.Size = new System.Drawing.Size(80, 17);
-            this.linkLabel_update_record.TabIndex = 7;
-            this.linkLabel_update_record.TabStop = true;
-            this.linkLabel_update_record.Text = "软件更新日志";
-            this.linkLabel_update_record.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_update_record_LinkClicked);
-            // 
             // Main
             // 
             this.AcceptButton = this.button_start;
@@ -349,7 +349,7 @@ namespace Get_taobao_order
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "淘宝买家订单规整工具(更新时间：2023.01.19 01:08)";
+            this.Text = "淘宝买家订单规整工具(更新时间：2024.07.22 14:20)";
             this.groupBox_input.ResumeLayout(false);
             this.panel_input.ResumeLayout(false);
             this.panel_input.PerformLayout();

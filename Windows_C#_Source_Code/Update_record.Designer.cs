@@ -51,7 +51,7 @@
             this.textBox_update_record.Size = new System.Drawing.Size(309, 157);
             this.textBox_update_record.TabIndex = 2;
             this.textBox_update_record.Text = "2022.11.26 22:18\r\n第一个版本发布。\r\n\r\n2023.01.19 01:08\r\n修改了用于分割的字符串，解决了某些使用场景下出现的订单号错误的bu" +
-    "g。\r\n";
+    "g。\r\n\r\n2024.07.22 14:20\r\n解决了预售订单场景下，获取订单状态失败导致程序报错的问题";
             // 
             // Update_record
             // 
