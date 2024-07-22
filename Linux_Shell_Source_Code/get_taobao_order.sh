@@ -1,6 +1,6 @@
 #!/bin/bash
 #编写时间：2022.11.12
-#更新时间：2023.01.19 01:49
+#更新时间：2024.07.22 11:55
 #Edit by ZJHCOFI
 #博客Blog：http://zjhcofi.com
 #Github：http://github.com/zjhcofi
@@ -12,6 +12,8 @@
 #第一个版本发布
 #2023.01.19 01:49
 #修改了用于分割的字符串，解决了某些使用场景下出现的订单号错误的bug
+#2024.07.22 11:55
+#解决了预售订单场景下，获取订单状态失败的问题
 #==================
 
 # 脚本当前路径
@@ -107,7 +109,12 @@ function Order_info_get() {
     # 订单实付金额
     dd_pay=`awk -F 'actualFee":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
     # 订单状态
-    dd_state=`awk -F '"}],"text":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
+    dd_state=""
+    if [[ `grep '"linkTitle":"预售"' ${dd_filename}` != "" ]]; then
+    	dd_state="预售"
+    else
+    	dd_state=`awk -F '"}],"text":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
+    fi
     # 订单店铺名称
     dd_shop_name=`awk -F '"shopName":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
     # 订单补充项目前缀
