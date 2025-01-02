@@ -16,7 +16,7 @@
 1、主要功能：**将淘宝订单页面上的原始数据进行规整，输出为直观的数据(支持Linux系统和Windows系统)**  
   
 2、使用方法：  
-图文教程：[【C#/Shell】淘宝买家订单规整工具](https://www.zjhcofi.com/2022/12/09/get-taobao-order/)  
+图文教程：[【C#/Shell】淘宝买家订单规整工具(2025更新)](https://www.zjhcofi.com/2022/12/09/get-taobao-order/)  
 视频教程：[【原创开源】淘宝买家订单导出规整工具(支持Windows和Linux)](https://www.bilibili.com/video/BV1Cg411J7zk)  
  
 3、成品下载地址：  
