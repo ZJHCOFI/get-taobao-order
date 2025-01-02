@@ -8,6 +8,8 @@
 修改了用于分割的字符串，解决了某些使用场景下出现的订单号错误的bug  
 2024-07-22 14:20  
 解决了预售订单场景下，获取订单状态失败的问题  
+2025-01-03 01:00  
+解决了商品含有多种属性(分类)的场景下，只输出一种属性(分类)的问题  
   
 =========================  
 
@@ -18,7 +20,7 @@
 视频教程：[【原创开源】淘宝买家订单导出规整工具(支持Windows和Linux)](https://www.bilibili.com/video/BV1Cg411J7zk)  
  
 3、成品下载地址：  
-**【Releases v1.2】** [淘宝买家订单规整工具(Get Taobao Order Tool)](https://github.com/ZJHCOFI/get-taobao-order/releases/tag/v1.2)  
+**【Releases v1.3】** [淘宝买家订单规整工具(Get Taobao Order Tool)](https://github.com/ZJHCOFI/get-taobao-order/releases/tag/v1.3)  
 **【个人博客】** [【C#/Shell】淘宝买家订单规整工具](https://www.zjhcofi.com/2022/12/09/get-taobao-order/) 
   
 4、目录说明：  
