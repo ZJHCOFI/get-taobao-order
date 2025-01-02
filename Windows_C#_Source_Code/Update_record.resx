@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox_update_record.Text" xml:space="preserve">
+    <value>2022.11.19 23:57
+★第一个版本发布
+
+2023.01.19 01:49
+★修改了用于分割的字符串，解决了某些使用场景下出现的订单号错误的bug
+•问题提出：小布布布（B站UID：3184592）
+•分析解决：cnlnn、ZJHCOFI
+
+2024.07.22 12:25
+★解决了预售订单场景下，获取订单状态失败的问题
+•问题提出：吃五个苹果（B站UID：1579744）
+•分析解决：ZJHCOFI
+
+2025.01.03 01:00
+★解决了商品含有多种属性(分类)的场景下，只输出一种属性(分类)的问题
+•问题提出：狐狸喵Official（B站UID：290707837）
+•分析解决：ZJHCOFI</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

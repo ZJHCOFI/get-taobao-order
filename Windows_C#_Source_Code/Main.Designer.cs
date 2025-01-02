@@ -44,15 +44,15 @@ namespace Get_taobao_order
             this.panel_info = new System.Windows.Forms.Panel();
             this.linkLabel_update_record = new System.Windows.Forms.LinkLabel();
             this.linkLabel_course = new System.Windows.Forms.LinkLabel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label_steps = new System.Windows.Forms.Label();
             this.linkLabel_author = new System.Windows.Forms.LinkLabel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label_copyright = new System.Windows.Forms.Label();
             this.linkLabel_license = new System.Windows.Forms.LinkLabel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_license = new System.Windows.Forms.Label();
             this.button_clear = new System.Windows.Forms.Button();
             this.textBox_test = new System.Windows.Forms.TextBox();
             this.progressBar_deal = new System.Windows.Forms.ProgressBar();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label_progress = new System.Windows.Forms.Label();
             this.label_test = new System.Windows.Forms.Label();
             this.groupBox_input.SuspendLayout();
             this.panel_input.SuspendLayout();
@@ -66,7 +66,7 @@ namespace Get_taobao_order
             this.label_title.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_title.Location = new System.Drawing.Point(215, 20);
             this.label_title.Name = "label_title";
-            this.label_title.Size = new System.Drawing.Size(170, 22);
+            this.label_title.Size = new System.Drawing.Size(212, 27);
             this.label_title.TabIndex = 0;
             this.label_title.Text = "淘宝买家订单规整工具";
             // 
@@ -134,7 +134,7 @@ namespace Get_taobao_order
             this.textBox_input_file.Location = new System.Drawing.Point(89, 8);
             this.textBox_input_file.MaxLength = 65536;
             this.textBox_input_file.Name = "textBox_input_file";
-            this.textBox_input_file.Size = new System.Drawing.Size(446, 23);
+            this.textBox_input_file.Size = new System.Drawing.Size(446, 27);
             this.textBox_input_file.TabIndex = 2;
             this.textBox_input_file.Text = "（如需选择文件，请先点选）";
             // 
@@ -143,7 +143,7 @@ namespace Get_taobao_order
             this.radioButton_file.AutoSize = true;
             this.radioButton_file.Location = new System.Drawing.Point(9, 9);
             this.radioButton_file.Name = "radioButton_file";
-            this.radioButton_file.Size = new System.Drawing.Size(74, 21);
+            this.radioButton_file.Size = new System.Drawing.Size(90, 24);
             this.radioButton_file.TabIndex = 0;
             this.radioButton_file.TabStop = true;
             this.radioButton_file.Text = "选择文件";
@@ -188,11 +188,11 @@ namespace Get_taobao_order
             this.panel_info.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.panel_info.Controls.Add(this.linkLabel_update_record);
             this.panel_info.Controls.Add(this.linkLabel_course);
-            this.panel_info.Controls.Add(this.label3);
+            this.panel_info.Controls.Add(this.label_steps);
             this.panel_info.Controls.Add(this.linkLabel_author);
-            this.panel_info.Controls.Add(this.label2);
+            this.panel_info.Controls.Add(this.label_copyright);
             this.panel_info.Controls.Add(this.linkLabel_license);
-            this.panel_info.Controls.Add(this.label1);
+            this.panel_info.Controls.Add(this.label_license);
             this.panel_info.Location = new System.Drawing.Point(0, 522);
             this.panel_info.Name = "panel_info";
             this.panel_info.Size = new System.Drawing.Size(605, 24);
@@ -204,7 +204,7 @@ namespace Get_taobao_order
             this.linkLabel_update_record.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.linkLabel_update_record.Location = new System.Drawing.Point(385, 2);
             this.linkLabel_update_record.Name = "linkLabel_update_record";
-            this.linkLabel_update_record.Size = new System.Drawing.Size(80, 17);
+            this.linkLabel_update_record.Size = new System.Drawing.Size(99, 20);
             this.linkLabel_update_record.TabIndex = 7;
             this.linkLabel_update_record.TabStop = true;
             this.linkLabel_update_record.Text = "软件更新日志";
@@ -216,21 +216,21 @@ namespace Get_taobao_order
             this.linkLabel_course.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.linkLabel_course.Location = new System.Drawing.Point(58, 2);
             this.linkLabel_course.Name = "linkLabel_course";
-            this.linkLabel_course.Size = new System.Drawing.Size(56, 17);
+            this.linkLabel_course.Size = new System.Drawing.Size(69, 20);
             this.linkLabel_course.TabIndex = 4;
             this.linkLabel_course.TabStop = true;
             this.linkLabel_course.Text = "点击此处";
             this.linkLabel_course.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_course_LinkClicked);
             // 
-            // label3
+            // label_steps
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(3, 2);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 17);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "操作教程：";
+            this.label_steps.AutoSize = true;
+            this.label_steps.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_steps.Location = new System.Drawing.Point(3, 2);
+            this.label_steps.Name = "label_steps";
+            this.label_steps.Size = new System.Drawing.Size(84, 20);
+            this.label_steps.TabIndex = 5;
+            this.label_steps.Text = "操作教程：";
             // 
             // linkLabel_author
             // 
@@ -238,21 +238,21 @@ namespace Get_taobao_order
             this.linkLabel_author.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.linkLabel_author.Location = new System.Drawing.Point(545, 2);
             this.linkLabel_author.Name = "linkLabel_author";
-            this.linkLabel_author.Size = new System.Drawing.Size(57, 17);
+            this.linkLabel_author.Size = new System.Drawing.Size(70, 20);
             this.linkLabel_author.TabIndex = 6;
             this.linkLabel_author.TabStop = true;
             this.linkLabel_author.Text = "ZJHCOFI";
             this.linkLabel_author.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_author_LinkClicked);
             // 
-            // label2
+            // label_copyright
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(470, 2);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 17);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Copyright ©";
+            this.label_copyright.AutoSize = true;
+            this.label_copyright.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_copyright.Location = new System.Drawing.Point(470, 2);
+            this.label_copyright.Name = "label_copyright";
+            this.label_copyright.Size = new System.Drawing.Size(100, 20);
+            this.label_copyright.TabIndex = 2;
+            this.label_copyright.Text = "Copyright ©";
             // 
             // linkLabel_license
             // 
@@ -260,21 +260,21 @@ namespace Get_taobao_order
             this.linkLabel_license.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.linkLabel_license.Location = new System.Drawing.Point(177, 2);
             this.linkLabel_license.Name = "linkLabel_license";
-            this.linkLabel_license.Size = new System.Drawing.Size(202, 17);
+            this.linkLabel_license.Size = new System.Drawing.Size(250, 20);
             this.linkLabel_license.TabIndex = 5;
             this.linkLabel_license.TabStop = true;
             this.linkLabel_license.Text = "BSD 3-Clause \"New\" or \"Revised\"";
             this.linkLabel_license.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_license_LinkClicked);
             // 
-            // label1
+            // label_license
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(120, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "开源协议：";
+            this.label_license.AutoSize = true;
+            this.label_license.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_license.Location = new System.Drawing.Point(120, 2);
+            this.label_license.Name = "label_license";
+            this.label_license.Size = new System.Drawing.Size(84, 20);
+            this.label_license.TabIndex = 1;
+            this.label_license.Text = "开源协议：";
             // 
             // button_clear
             // 
@@ -304,15 +304,15 @@ namespace Get_taobao_order
             this.progressBar_deal.Size = new System.Drawing.Size(489, 20);
             this.progressBar_deal.TabIndex = 7;
             // 
-            // label4
+            // label_progress
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(25, 255);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 17);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "进度条：";
+            this.label_progress.AutoSize = true;
+            this.label_progress.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_progress.Location = new System.Drawing.Point(25, 255);
+            this.label_progress.Name = "label_progress";
+            this.label_progress.Size = new System.Drawing.Size(69, 20);
+            this.label_progress.TabIndex = 9;
+            this.label_progress.Text = "进度条：";
             // 
             // label_test
             // 
@@ -321,7 +321,7 @@ namespace Get_taobao_order
             this.label_test.ForeColor = System.Drawing.Color.Black;
             this.label_test.Location = new System.Drawing.Point(824, 501);
             this.label_test.Name = "label_test";
-            this.label_test.Size = new System.Drawing.Size(157, 28);
+            this.label_test.Size = new System.Drawing.Size(202, 36);
             this.label_test.TabIndex = 32;
             this.label_test.Text = "🤪测试专用框⬆️";
             this.label_test.Visible = false;
@@ -329,13 +329,13 @@ namespace Get_taobao_order
             // Main
             // 
             this.AcceptButton = this.button_start;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 544);
             this.Controls.Add(this.label_test);
             this.Controls.Add(this.progressBar_deal);
             this.Controls.Add(this.textBox_test);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label_progress);
             this.Controls.Add(this.button_clear);
             this.Controls.Add(this.panel_info);
             this.Controls.Add(this.button_start);
@@ -349,7 +349,7 @@ namespace Get_taobao_order
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "淘宝买家订单规整工具(更新时间：2024.07.22 14:20)";
+            this.Text = "淘宝买家订单规整工具(更新时间：2025.01.03 01:00)";
             this.groupBox_input.ResumeLayout(false);
             this.panel_input.ResumeLayout(false);
             this.panel_input.PerformLayout();
@@ -373,19 +373,19 @@ namespace Get_taobao_order
         private System.Windows.Forms.Button button_start;
         private System.Windows.Forms.Panel panel_info;
         private System.Windows.Forms.LinkLabel linkLabel_author;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_copyright;
         private System.Windows.Forms.LinkLabel linkLabel_license;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_license;
         private System.Windows.Forms.RadioButton radioButton_text;
         private System.Windows.Forms.RadioButton radioButton_file;
         private System.Windows.Forms.LinkLabel linkLabel_course;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_steps;
         private System.Windows.Forms.Button button_clear;
         private System.Windows.Forms.Panel panel_input;
         private System.Windows.Forms.Label label_tip;
         private System.Windows.Forms.TextBox textBox_test;
         private System.Windows.Forms.ProgressBar progressBar_deal;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label_progress;
         private System.Windows.Forms.Label label_test;
         private System.Windows.Forms.LinkLabel linkLabel_update_record;
     }
