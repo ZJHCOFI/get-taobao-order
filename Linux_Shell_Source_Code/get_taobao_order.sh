@@ -1,19 +1,27 @@
 #!/bin/bash
 #编写时间：2022.11.12
-#更新时间：2024.07.22 12:25
+#更新时间：2025.01.03 01:00
 #Edit by ZJHCOFI
-#博客Blog：http://zjhcofi.com
-#Github：http://github.com/zjhcofi
+#博客Blog：https://zjhcofi.com
+#Github：https://github.com/zjhcofi
 #功能：规整淘宝中的买家订单
 #开源协议：BSD 3-Clause “New” or “Revised” License (https://choosealicense.com/licenses/bsd-3-clause/)
-#后续更新或漏洞修补通告页面：https://space.bilibili.com/9704701/dynamic
+#后续更新或漏洞修补通告页面：https://github.com/zjhcofi/get-taobao-order
 #=====更新日志=====
-#2022.11.19 23:57
+#--2022.11.19 23:57--
 #第一个版本发布
-#2023.01.19 01:49
+#--2023.01.19 01:49--
 #修改了用于分割的字符串，解决了某些使用场景下出现的订单号错误的bug
-#2024.07.22 12:25
+#问题提出：小布布布（B站UID：3184592）
+#分析解决：cnlnn、ZJHCOFI
+#--2024.07.22 12:25--
 #解决了预售订单场景下，获取订单状态失败的问题
+#问题提出：吃五个苹果（B站UID：1579744）
+#分析解决：ZJHCOFI
+#--2025.01.03 01:00--
+#解决了商品含有多种属性(分类)的场景下，只输出一种属性(分类)的问题
+#问题提出：狐狸喵Official（B站UID：290707837）
+#分析解决：ZJHCOFI
 #==================
 
 # 脚本当前路径
@@ -52,9 +60,9 @@ function Master_order_split() {
     awk_num_str="${awk_num}"
     # 生成主订单临时文件
     awk -v num="${awk_num_str}" -F 'batchGroupTips' '{print $num}' ${path_way}/zjhcofi_1.tmp > ${path_way}/zjhcofi_dd_${file_num}.tmp
-    string=`cat ${path_way}/zjhcofi_dd_${file_num}.tmp`
-    awk_num=`expr ${awk_num} + 1`
-    file_num=`expr ${file_num} + 1`
+    string=$(cat ${path_way}/zjhcofi_dd_${file_num}.tmp)
+    awk_num=$(expr ${awk_num} + 1)
+    file_num=$(expr ${file_num} + 1)
   done
   # 删除多余的临时文件
   ls ${path_way}/zjhcofi_dd_*tmp | head -n 1 | xargs rm -f
@@ -71,16 +79,16 @@ function Sub_order_split() {
     declare -i file_num=10000
     string="zjhcofi"
     # 主订单编号
-    dd_num=`echo ${dd_filename} | awk -F 'zjhcofi_dd_' '{print $2}' | cut -d '.' -f 1`
+    dd_num=$(echo ${dd_filename} | awk -F 'zjhcofi_dd_' '{print $2}' | cut -d '.' -f 1)
     # 循环拆分子订单
     while [[ "$string" != "" ]]
     do
       awk_num_str="${awk_num}"
       # 生成子订单临时文件
       awk -v num="${awk_num_str}" -F 'skuText' '{print $num}' ${dd_filename} > ${path_way}/zjhcofi_goods_${dd_num}_${file_num}.tmp
-      string=`cat ${path_way}/zjhcofi_goods_${dd_num}_${file_num}.tmp`
-      awk_num=`expr ${awk_num} + 1`
-      file_num=`expr ${file_num} + 1`
+      string=$(cat ${path_way}/zjhcofi_goods_${dd_num}_${file_num}.tmp)
+      awk_num=$(expr ${awk_num} + 1)
+      file_num=$(expr ${file_num} + 1)
     done
     # 删除多余的临时文件
     ls ${path_way}/zjhcofi_goods_${dd_num}_*.tmp | tail -n 1 | xargs rm -f
@@ -97,73 +105,91 @@ function Order_info_get() {
   do
     #------主订单-----
     # 主订单文件名
-    dd_filename=`ls ${path_way}/zjhcofi_goods_${dd_num}*tmp | head -n 1`
+    dd_filename=$(ls ${path_way}/zjhcofi_goods_${dd_num}*tmp | head -n 1)
     # 订单号
     #dd_id=`awk -F ',"inHold":' '{print $1}' ${dd_filename} | awk -F '"id":' '{print $2}'`
-    dd_id=`awk -F '","operations":\\\[\\\{"' '{print $1}' ${dd_filename} | awk -F '"id":"' '{print $2}'`
-    dd_id=`echo ${dd_id} | awk -F ',' '{print $1}'`
+    dd_id=$(awk -F '","operations":\\[{"' '{print $1}' ${dd_filename} | awk -F '"id":"' '{print $2}')
+    dd_id=$(echo ${dd_id} | awk -F ',' '{print $1}')
     # 订单创建时间
-    dd_create_time=`awk -F 'createTime":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
+    dd_create_time=$(awk -F 'createTime":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}')
     # 订单货币符号
-    dd_currency_symbol=`awk -F '"currencySymbol":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
+    dd_currency_symbol=$(awk -F '"currencySymbol":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}')
     # 订单实付金额
-    dd_pay=`awk -F 'actualFee":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
+    dd_pay=$(awk -F 'actualFee":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}')
     # 订单状态
     dd_state=""
-    if [[ `grep '"}],"text":"' ${dd_filename}` != "" ]]; then
-    	dd_state=`awk -F '"}],"text":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
-    elif [[ `grep '"linkTitle":"预售"' ${dd_filename}` != "" ]]; then
+    if [[ $(grep '"}],"text":"' ${dd_filename}) != "" ]]; then
+    	dd_state=$(awk -F '"}],"text":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}')
+    elif [[ $(grep '"linkTitle":"预售"' ${dd_filename}) != "" ]]; then
     	dd_state="预售"
     else
     	dd_state="未知状态"
     fi
     # 订单店铺名称
-    dd_shop_name=`awk -F '"shopName":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
+    dd_shop_name=$(awk -F '"shopName":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}')
     # 订单补充项目前缀
-    dd_postFees_prefix=`awk -F '{"prefix":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
+    dd_postFees_prefix=$(awk -F '{"prefix":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}')
     # 订单补充项目后缀
-    dd_postFees_suffix=`awk -F 'suffix":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
+    dd_postFees_suffix=$(awk -F 'suffix":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}')
     # 订单补充项目数值
-    dd_postFees_value=`awk -F ',"value":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}'`
-    dd_postFees_value=`echo ${dd_postFees_value} | sed "s/${dd_currency_symbol}//g"`
+    dd_postFees_value=$(awk -F ',"value":"' '{print $2}' ${dd_filename} | awk -F '"' '{print $1}')
+    dd_postFees_value=$(echo ${dd_postFees_value} | sed "s/${dd_currency_symbol}//g")
     
     #------子订单（商品）------
     ls ${path_way}/zjhcofi_goods_${dd_num}*tmp | while read goods_filename
     do
-      goods_filename_bool=`echo ${goods_filename} | awk -F "zjhcofi_goods_${dd_num}_" '{print $2}' | cut -d '.' -f 1`
+      goods_filename_bool=$(echo ${goods_filename} | awk -F "zjhcofi_goods_${dd_num}_" '{print $2}' | cut -d '.' -f 1)
       if [[ "$goods_filename_bool" != "10000" ]]; then
         # 商品名
-        goods_name=`awk -F '"title":"' '{print $2}' ${goods_filename} | awk -F '"' '{print $1}'`
+        goods_name=$(awk -F '"title":"' '{print $2}' ${goods_filename} | awk -F '"' '{print $1}')
         # 商品单价
-        goods_price=`awk -F '"realTotal":"' '{print $2}' ${goods_filename} | awk -F '"' '{print $1}'`
+        goods_price=$(awk -F '"realTotal":"' '{print $2}' ${goods_filename} | awk -F '"' '{print $1}')
         # 商品数量
-        goods_quantity=`awk -F '"quantity":"' '{print $2}' ${goods_filename} | awk -F '"' '{print $1}'`
-        # 商品分类前缀
-        goods_tpye_prefix=`awk -F '"name":"' '{print $2}' ${goods_filename} | awk -F '"' '{print $1}'`
-        if [[ "$goods_tpye_prefix" == "" ]]; then
-          goods_tpye_prefix="(无)"
+        goods_quantity=$(awk -F '"quantity":"' '{print $2}' ${goods_filename} | awk -F '"' '{print $1}')
+        # 商品分类循环
+        goods_tpye_prefix=""
+        goods_tpye=""
+        goods_tpye_info=$(awk -F '\\[' '{print $2}' ${goods_filename} | awk -F '],' '{print $1}')
+        goods_tpye_num=$(echo $goods_tpye_info | grep -o 'name' | wc -l)
+        if [[ "$goods_tpye_num" == 0 || "$goods_tpye_num" == 1 ]]; then
+          # 商品分类前缀
+          goods_tpye_prefix=$(echo $goods_tpye_info | awk -F '"name":"' '{print $2}' | awk -F '"' '{print $1}')
+          if [[ "$goods_tpye_prefix" == "" ]]; then
+            goods_tpye_prefix="(无)"
+          fi
+          # 商品分类详情
+          goods_tpye=$(echo $goods_tpye_info | awk -F '"value":"' '{print $2}' | awk -F '"' '{print $1}')
+          if [[ "$goods_tpye" == "" ]]; then
+            goods_tpye="(无)"
+          fi
+        else
+          for (( a=2; a<=$goods_tpye_num+1; a++ ))
+          do
+            # 商品分类前缀
+            goods_tpye_prefix+=$(echo $(echo $goods_tpye_info | awk -F '"name":"' '{print $'$a'}' | awk -F '"' '{print $1}') | sed 's/;/,/g')";"
+            # 商品分类详情
+            goods_tpye+=$(echo $(echo $goods_tpye_info | awk -F '"value":"' '{print $'$a'}' | awk -F '"' '{print $1}') | sed 's/;/,/g')";"
+          done
         fi
-        # 商品分类
-        goods_tpye=`awk -F '"value":"' '{print $2}' ${goods_filename} | awk -F '"' '{print $1}'`
-        if [[ "$goods_tpye" == "" ]]; then
-          goods_tpye="(无)"
-        fi
+        # 商品分类去除最后一个";"
+        goods_tpye_prefix=$(echo ${goods_tpye_prefix/%;})
+        goods_tpye=$(echo ${goods_tpye/%;})
 
         # 格式化数据并输出
         touch ${path_way}/result_taobao.txt
-        bool_head=`grep "补充项目" ${path_way}/result_taobao.txt`
+        bool_head=$(grep "补充项目" ${path_way}/result_taobao.txt)
         if [[ "$bool_head" == "" ]]; then
-          echo -e "下单时间|订单状态|商品名|分类前缀|分类|货币类型|单价|数量|补充项目|补充项目数值|实付金额|店铺名|订单号" >> ${path_way}/result_taobao.txt
+          echo -e "下单时间|订单状态|商品名|分类前缀(多种分类以;分隔)|分类详情(多种分类以;分隔)|货币类型|单价|数量|补充项目|补充项目数值|实付金额|店铺名|订单号" >> ${path_way}/result_taobao.txt
         fi
         if [[ "$goods_filename_bool" -le 10001 ]]; then
           echo -e "${dd_create_time}|${dd_state}|${goods_name}|${goods_tpye_prefix}|${goods_tpye}|${dd_currency_symbol}|${goods_price}|${goods_quantity}|${dd_postFees_prefix}${dd_postFees_suffix}|${dd_postFees_value}|${dd_pay}|${dd_shop_name}|${dd_id}" >> ${path_way}/result_taobao.txt
         else
           echo -e "${dd_create_time}|${dd_state}|${goods_name}|${goods_tpye_prefix}|${goods_tpye}|${dd_currency_symbol}|${goods_price}|${goods_quantity}||||${dd_shop_name}|${dd_id}" >> ${path_way}/result_taobao.txt
-        fi 
-      fi       
-    done 
+        fi
+      fi
+    done
     # 循环+1
-    dd_num=`expr ${dd_num} + 1`
+    dd_num=$(expr ${dd_num} + 1)
   done
 }
 
@@ -175,7 +201,7 @@ function Order_info_check() {
   if [ ! -f "${path_way}/result_taobao.txt" ];then
     echo -e "\n=================\n【错误】\n结果文件生成失败！\n=================\n"
   else
-    bool_head=`grep "补充项目" ${path_way}/result_taobao.txt`
+    bool_head=$(grep "补充项目" ${path_way}/result_taobao.txt)
     if [[ "$bool_head" != "" ]]; then
       echo -e "\n=================\n【恭喜】\n订单信息获取成功！\n请输入：\ncat result_taobao.txt\n进行查看\n=================\n"
     fi
