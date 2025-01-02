@@ -20,8 +20,8 @@
 视频教程：[【原创开源】淘宝买家订单导出规整工具(支持Windows和Linux)](https://www.bilibili.com/video/BV1Cg411J7zk)  
  
 3、成品下载地址：  
-**【Releases v1.3】** [淘宝买家订单规整工具(Get Taobao Order Tool)](https://github.com/ZJHCOFI/get-taobao-order/releases/tag/v1.3)  
-**【个人博客】** [【C#/Shell】淘宝买家订单规整工具](https://www.zjhcofi.com/2022/12/09/get-taobao-order/) 
+**【Releases v1.3】** [淘宝买家订单规整工具(Get Taobao Order Tool)v1.3](https://github.com/ZJHCOFI/get-taobao-order/releases/tag/v1.3)  
+**【个人博客】** [【C#/Shell】淘宝买家订单规整工具(2025更新)](https://www.zjhcofi.com/2022/12/09/get-taobao-order/) 
   
 4、目录说明：  
 **【Linux_Shell_Source_Code】** 内的文件为脚本源代码  
