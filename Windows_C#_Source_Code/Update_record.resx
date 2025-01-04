@@ -118,15 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox_update_record.Text" xml:space="preserve">
-    <value>2022.11.19 23:57
+    <value>★检查更新：
+•Github：https://github.com/ZJHCOFI/get-taobao-order
+•Blog：https://www.zjhcofi.com/2022/12/09/get-taobao-order/
+
+2022.11.19 23:57
 ★第一个版本发布
 
-2023.01.19 01:49
+2023.01.19 01:08
 ★修改了用于分割的字符串，解决了某些使用场景下出现的订单号错误的bug
 •问题提出：小布布布（B站UID：3184592）
-•分析解决：cnlnn、ZJHCOFI
+•分析解决：cnlnn（https://github.com/cnlnn）、ZJHCOFI
 
-2024.07.22 12:25
+2024.07.22 14:20
 ★解决了预售订单场景下，获取订单状态失败的问题
 •问题提出：吃五个苹果（B站UID：1579744）
 •分析解决：ZJHCOFI
@@ -134,6 +138,12 @@
 2025.01.03 01:00
 ★解决了商品含有多种属性(分类)的场景下，只输出一种属性(分类)的问题
 •问题提出：狐狸喵Official（B站UID：290707837）
+•分析解决：ZJHCOFI
+
+2025.01.04 22:30
+★解决了在网页上进行订单筛选后，原始数据规整失败的问题
+★新增了子订单状态的输出
+•问题提出：csjjjj123（https://github.com/csjjjj123）、狐狸喵Official（B站UID：290707837）
 •分析解决：ZJHCOFI</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />

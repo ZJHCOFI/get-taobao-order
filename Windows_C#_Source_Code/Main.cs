@@ -16,17 +16,17 @@ namespace Get_taobao_order
         }
 
         // 编写时间：2022.11.19
-        // 更新时间：2025.01.03 01:00
+        // 更新时间：2025.01.04 22:30
         // Edit by ZJHCOFI
         // 博客Blog：https://zjhcofi.com
         // Github：https://github.com/zjhcofi
-        // 功能：规整淘宝中的买家订单
+        // 功能：规整淘宝的买家订单
         // 开源协议：BSD 3-Clause “New” or “Revised” License (https://choosealicense.com/licenses/bsd-3-clause/)
         // 后续更新或漏洞修补通告页面：https://github.com/zjhcofi/get-taobao-order
         //=====更新日志=====
         //2022.11.19 23:57
         // 第一个版本发布
-        //2023.01.19 01:49
+        //2023.01.19 01:08
         // 修改了用于分割的字符串，解决了某些使用场景下出现的订单号错误的bug
         // 问题提出：小布布布（B站UID：3184592）
         // 分析解决：cnlnn、ZJHCOFI
@@ -38,9 +38,14 @@ namespace Get_taobao_order
         // 解决了商品含有多种属性(分类)的场景下，只输出一种属性(分类)的问题
         // 问题提出：狐狸喵Official（B站UID：290707837）
         // 分析解决：ZJHCOFI
+        //2025.01.04 22:30
+        // 1、解决了在网页上进行订单筛选后，原始数据规整失败的问题
+        // 2、新增了子订单状态的输出
+        // 问题提出：csjjjj123（github.com/csjjjj123）、狐狸喵Official（B站UID：290707837）
+        // 分析解决：ZJHCOFI
         //==================
 
-        //文本处理委托-First_deal
+        //=======文本处理委托-First_deal=======
         private static bool FindCallback_text_deal_1(string val)
         {
             if (val.IndexOf("notShowSellerInfo") >= 0)
@@ -209,11 +214,14 @@ namespace Get_taobao_order
                     //鼠标等待
                     this.Cursor = Cursors.WaitCursor;
 
+                    //去除在网页进行订单筛选后的原始数据中的换行符
+                    textBox_test.Text = (((textBox_input_text.Text.Replace("</font>\r\n", "").Replace("</font>\n", "")).Replace("</font>\r", "")).Replace("<font color=\\\"red\\\">", ""));
+
                     //逐行读取源内容并存进数组中
-                    string[] StrArray_source_text = new string[textBox_input_text.Lines.Length];
-                    for (int Int_i = 0; Int_i < textBox_input_text.Lines.Length; Int_i++)
+                    string[] StrArray_source_text = new string[textBox_test.Lines.Length];
+                    for (int Int_i = 0; Int_i < textBox_test.Lines.Length; Int_i++)
                     {
-                        StrArray_source_text[Int_i] = textBox_input_text.Lines[Int_i];
+                        StrArray_source_text[Int_i] = textBox_test.Lines[Int_i];
                     }
                     //网页源代码预先处理--步骤1：取出“notShowSellerInfo”字符所在的数组到新数组
                     string[] StrArray_deal_text_1 = Array.FindAll(StrArray_source_text, FindCallback_text_deal_1);
@@ -359,8 +367,10 @@ namespace Get_taobao_order
                                 //定义输出内容
                                 string Str_goods_tpye_prefix = "";  //商品属性(分类)前缀
                                 string Str_goods_tpye = "";  //商品属性(分类)详情
+                                string Str_goods_state = "";  //商品状态详情
                                 List<string> List_goods_tpye_prefix = new List<string>();  //商品属性(分类)前缀(中转用)
                                 List<string> List_goods_tpye = new List<string>();  //商品属性(分类)详情(中转用)
+                                List<string> List_goods_state = new List<string>();  //商品状态详情(中转用)
 
                                 //商品名截取
                                 //string[] goods_name_split = Str_b.Split(new string[] { "\"title\":\"", "\"" }, StringSplitOptions.RemoveEmptyEntries);
@@ -422,12 +432,44 @@ namespace Get_taobao_order
                                     //将List转换成字符串并输出
                                     Str_goods_tpye = string.Join(";", List_goods_tpye);
                                 }
-                                
-                                List_all_output.Add(List_dd_create_time.Last() + "|" + List_dd_state.Last() + "|" + List_goods_name.Last() + "|" + Str_goods_tpye_prefix.ToString() + "|" + Str_goods_tpye.ToString()
+
+                                //商品状态总信息截取
+                                string[] StrArray_goods_state_info_split_1 = Regex.Split(Str_b, "operations"); 
+                                if (StrArray_goods_state_info_split_1.Length < 2)
+                                {
+                                    Str_goods_state = "(无)";
+                                }
+                                else
+                                {
+                                    string[] StrArray_goods_state_info_split_2 = Regex.Split(StrArray_goods_state_info_split_1[1], "\\[");
+                                    string[] StrArray_goods_state_info_split_3 = Regex.Split(StrArray_goods_state_info_split_2[1], "\\]");
+                                    string Str_goods_state_info = string.Join("", StrArray_goods_state_info_split_3[0]);
+
+                                    //商品状态详情截取
+                                    string[] StrArray_goods_state_split_1 = Regex.Split(Str_goods_state_info, "\"text\":\"");
+                                    if (StrArray_goods_state_split_1.Length < 2)
+                                    {
+                                        Str_goods_state = "(无)";
+                                    }
+                                    else
+                                    {
+                                        //获取所有分类到List
+                                        for (int Int_goods_state_num = 1; Int_goods_state_num < StrArray_goods_state_split_1.Length; Int_goods_state_num++)
+                                        {
+                                            string[] StrArray_goods_state_split_2 = Regex.Split(StrArray_goods_state_split_1[Int_goods_state_num], "\"");
+                                            List_goods_state.Add(StrArray_goods_state_split_2[0].Replace(";", ","));
+                                        }
+                                        //将List转换成字符串并输出
+                                        Str_goods_state = string.Join(";", List_goods_state);
+                                    }
+                                }
+
+
+                                //输出
+                                List_all_output.Add(List_dd_create_time.Last() + "|" + List_dd_state.Last() + "|" + Str_goods_state + "|" + List_goods_name.Last() + "|" + Str_goods_tpye_prefix.ToString() + "|" + Str_goods_tpye.ToString()
                                     + "|" + List_dd_currency_symbol.Last() + "|" + List_goods_price.Last() + "|" + List_goods_quantity.Last() + "|" + List_dd_postFees_prefix.Last() +
                                     List_dd_postFees_suffix.Last() + "|" + List_dd_postFees_value.Last() + "|" + List_dd_pay.Last() + "|" + List_dd_shop_name.Last() + "|" + List_dd_id.Last());
-                                //测试输出
-                                textBox_test.Text = List_dd_create_time.Last() + "|" + List_dd_state.Last() + "|" + List_goods_name.Last() + "|" + Str_goods_tpye_prefix.ToString() + "|" + Str_goods_tpye.ToString()
+                                textBox_test.Text = List_dd_create_time.Last() + "|" + List_dd_state.Last() + "|" + Str_goods_state + "|" + List_goods_name.Last() + "|" + Str_goods_tpye_prefix.ToString() + "|" + Str_goods_tpye.ToString()
                                     + "|" + List_dd_currency_symbol.Last() + "|" + List_goods_price.Last() + "|" + List_goods_quantity.Last() + "|" + List_dd_postFees_prefix.Last() +
                                     List_dd_postFees_suffix.Last() + "|" + List_dd_postFees_value.Last() + "|" + List_dd_pay.Last() + "|" + List_dd_shop_name.Last() + "|" + List_dd_id.Last();
 
@@ -438,8 +480,10 @@ namespace Get_taobao_order
                                 //定义输出内容
                                 string Str_goods_tpye_prefix = "";  //商品属性(分类)前缀
                                 string Str_goods_tpye = "";  //商品属性(分类)详情
+                                string Str_goods_state = "";  //商品状态详情
                                 List<string> List_goods_tpye_prefix = new List<string>();  //商品属性(分类)前缀(中转用)
                                 List<string> List_goods_tpye = new List<string>();  //商品属性(分类)详情(中转用)
+                                List<string> List_goods_state = new List<string>();  //商品状态详情(中转用)
 
                                 //商品名截取
                                 //string[] goods_name_split = Str_b.Split(new string[] { "\"title\":\"", "\"" }, StringSplitOptions.RemoveEmptyEntries);
@@ -502,10 +546,42 @@ namespace Get_taobao_order
                                     Str_goods_tpye = string.Join(";", List_goods_tpye);
                                 }
 
-                                List_all_output.Add(List_dd_create_time.Last() + "|" + List_dd_state.Last() + "|" + List_goods_name.Last() + "|" + Str_goods_tpye_prefix.ToString() + "|" + Str_goods_tpye.ToString()
+                                //商品状态总信息截取
+                                string[] StrArray_goods_state_info_split_1 = Regex.Split(Str_b, "operations");
+                                if (StrArray_goods_state_info_split_1.Length < 2)
+                                {
+                                    Str_goods_state = "(无)";
+                                }
+                                else
+                                {
+                                    string[] StrArray_goods_state_info_split_2 = Regex.Split(StrArray_goods_state_info_split_1[1], "\\[");
+                                    string[] StrArray_goods_state_info_split_3 = Regex.Split(StrArray_goods_state_info_split_2[1], "\\]");
+                                    string Str_goods_state_info = string.Join("", StrArray_goods_state_info_split_3[0]);
+
+                                    //商品状态详情截取
+                                    string[] StrArray_goods_state_split_1 = Regex.Split(Str_goods_state_info, "\"text\":\"");
+                                    if (StrArray_goods_state_split_1.Length < 2)
+                                    {
+                                        Str_goods_state = "(无)";
+                                    }
+                                    else
+                                    {
+                                        //获取所有分类到List
+                                        for (int Int_goods_state_num = 1; Int_goods_state_num < StrArray_goods_state_split_1.Length; Int_goods_state_num++)
+                                        {
+                                            string[] StrArray_goods_state_split_2 = Regex.Split(StrArray_goods_state_split_1[Int_goods_state_num], "\"");
+                                            List_goods_state.Add(StrArray_goods_state_split_2[0].Replace(";", ","));
+                                        }
+                                        //将List转换成字符串并输出
+                                        Str_goods_state = string.Join(";", List_goods_state);
+                                    }
+                                }
+
+
+                                //输出
+                                List_all_output.Add(List_dd_create_time.Last() + "|" + List_dd_state.Last() + "|" + Str_goods_state + "|" + List_goods_name.Last() + "|" + Str_goods_tpye_prefix.ToString() + "|" + Str_goods_tpye.ToString()
                                     + "|" + List_dd_currency_symbol.Last() + "|" + List_goods_price.Last() + "|" + List_goods_quantity.Last() + "|" + "|" + "|" + "|" + List_dd_shop_name.Last() + "|" + List_dd_id.Last());
-                                //测试输出
-                                textBox_test.Text = List_dd_create_time.Last() + "|" + List_dd_state.Last() + "|" + List_goods_name.Last() + "|" + Str_goods_tpye_prefix.ToString() + "|" + Str_goods_tpye.ToString()
+                                textBox_test.Text = List_dd_create_time.Last() + "|" + List_dd_state.Last() + "|" + Str_goods_state + "|" + List_goods_name.Last() + "|" + Str_goods_tpye_prefix.ToString() + "|" + Str_goods_tpye.ToString()
                                     + "|" + List_dd_currency_symbol.Last() + "|" + List_goods_price.Last() + "|" + List_goods_quantity.Last() + "|" + "|" + "|" + "|" + List_dd_shop_name.Last() + "|" + List_dd_id.Last();
 
                                 Int_a += 1;
@@ -532,7 +608,7 @@ namespace Get_taobao_order
                     }
 
                     //输出结果
-                    textBox_output.Text = "下单时间|订单状态|商品名|分类前缀(多种分类以;分隔)|分类详情(多种分类以;分隔)|货币类型|单价|数量|补充项目|补充项目数值|实付金额|店铺名|订单号" + Environment.NewLine;
+                    textBox_output.Text = "下单时间|主订单状态|子订单状态|商品名|分类前缀(多种分类以;分隔)|分类详情(多种分类以;分隔)|货币类型|单价|数量|补充项目|补充项目数值|实付金额|店铺名|订单号" + Environment.NewLine;
                     for (int Int_i = 0; Int_i < List_all_output.Count; Int_i++)
                     {
                         textBox_output.Text += List_all_output[Int_i] + Environment.NewLine;
@@ -584,7 +660,7 @@ namespace Get_taobao_order
             }
         }
 
-        //点击“清空信息”按钮
+        //=======点击“清空信息”按钮=======
         private void button_clear_Click(object sender, EventArgs e)
         {
             radioButton_file.Checked = true;
@@ -596,5 +672,10 @@ namespace Get_taobao_order
             progressBar_deal.Value = 0;
         }
 
+        //=======主界面加载=======
+        private void Main_Load(object sender, EventArgs e)
+        {
+            radioButton_text.Checked = true;
+        }
     }
 }
